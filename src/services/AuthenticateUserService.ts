@@ -2,11 +2,11 @@ import axios from "axios";
 import prismaClient from "../prisma";
 import { sign } from "jsonwebtoken"; 
 
-interface IAccessTokenResponse{
+interface IAccessTokenResponse{ //filtra somente a informação necessária
     access_token: string
 }
 
-interface IUserResponse{
+interface IUserResponse{ //filtra somente as informações necessárias
     avatar_url: string,
     login: string,
     id: number,
@@ -27,7 +27,7 @@ class AuthenticateUserService{
                 "Accept":"application/json"
             }
         });
-        const response = await axios.get<IUserResponse>("https://api.github.com/user",{
+        const response = await axios.get<IUserResponse>("https://api.github.com/user",{ //pega as informações presentes no filtro (interface IUserRsponse) do usuário logado na aplicação
             headers:{
                 authorization: `Bearer ${accessTokenResponse.access_token}`
             }
